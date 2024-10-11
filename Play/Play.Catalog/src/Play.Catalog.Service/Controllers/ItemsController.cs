@@ -15,6 +15,7 @@ namespace Play.Catalog.Service.Controllers
         [HttpGet]
         public async Task<IEnumerable<ItemDto>> GetAsync()
         {
+            await Task.Delay(10000);
             var items = (await itemRepository.GetAllAsync()).Select(item => item.AsDto());
             return items;
         }

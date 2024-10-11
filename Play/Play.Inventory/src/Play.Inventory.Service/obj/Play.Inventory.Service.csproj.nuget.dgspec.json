@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[8.0.8, )"
             },
+            "Microsoft.Extensions.Http.Polly": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
             "Play.Common": {
               "target": "Package",
               "version": "[1.0.0, )"
