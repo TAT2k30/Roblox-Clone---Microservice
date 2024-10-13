@@ -8,7 +8,7 @@ namespace Play.Inventory.Service.Controllers
 {
     [ApiController]
     [Route("items")]
-    public class ItemController(IRepository<InventoryItem> itemsPreository, CatalogClient catalogClient) : ControllerBase
+    public class ItemController(IRepository<InventoryItem> inventoryItemRepository, IRepository<CatalogItem> catalogItemRepository) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InventoryItemDto>>> GetAsync(Guid userId)
@@ -17,25 +17,37 @@ namespace Play.Inventory.Service.Controllers
             {
                 return BadRequest("User ID cannot be empty.");
             }
-            //Lấy tất cả items trong inventory của user mà trạng thái cập nhật là mới nhất.
-            var catalogItems = await catalogClient.GetCatalogItemAsync();
-            var items = (await itemsPreository.GetAllAsync(items => items.UserId == userId))
-                        .Select(items => items)
-                        .OrderByDescending(items => items.AcquiredDate);
 
-            var inventoryIntemsDto = items.Select(inventoryIntem =>
+            // Lấy tất cả items trong inventory của user mà trạng thái cập nhật là mới nhất.
+            var items = await inventoryItemRepository.GetAllAsync(item => item.UserId == userId);
+
+            var itemsId = items.Select(item => item.CatalogItemId).ToList(); // Chuyển đổi thành danh sách để sử dụng trong truy vấn
+
+            var catalogItemEntities = await catalogItemRepository.GetAllAsync(item => itemsId.Contains(item.Id));
+
+            var inventoryItemsDto = items.Select(inventoryItem =>
             {
-                var catalogItem = catalogItems.Single(catalogItem => catalogItem.Id == inventoryIntem.CatalogItemId);
-                return inventoryIntem.AsDto(catalogItem.Name, catalogItem.Description);
+                // Sử dụng FirstOrDefault thay vì Single để tránh lỗi nếu không tìm thấy
+                var catalogItem = catalogItemEntities.FirstOrDefault(catalogItem => catalogItem.Id == inventoryItem.CatalogItemId);
+
+                // Kiểm tra nếu catalogItem không tồn tại
+                if (catalogItem == null)
+                {
+                    // Xử lý trường hợp không tìm thấy catalog item, có thể trả về null hoặc một giá trị mặc định
+                    return inventoryItem.AsDto(catalogItem?.Name ?? "Unknown", catalogItem?.Description ?? "No description available");
+                }
+
+                return inventoryItem.AsDto(catalogItem.Name, catalogItem.Description);
             });
 
-            return Ok(inventoryIntemsDto);
+            return Ok(inventoryItemsDto);
         }
+
 
         [HttpPost]
         public async Task<ActionResult> PostAsync(GrantItemDto grantItemDto)
         {
-            var inventoryItem = await itemsPreository.GetAsync(
+            var inventoryItem = await inventoryItemRepository.GetAsync(
                 items => items.UserId == grantItemDto.UserId && items.CatalogItemId == grantItemDto.CatalogItemId
             );
 
@@ -49,12 +61,12 @@ namespace Play.Inventory.Service.Controllers
                     AcquiredDate = DateTimeOffset.UtcNow
                 };
 
-                await itemsPreository.CreateAsync(inventoryItem);
+                await inventoryItemRepository.CreateAsync(inventoryItem);
             }
             else
             {
                 inventoryItem.Quantity += grantItemDto.Quantity;
-                await itemsPreository.UpdateAsync(inventoryItem);
+                await inventoryItemRepository.UpdateAsync(inventoryItem);
             }
 
             return Ok();

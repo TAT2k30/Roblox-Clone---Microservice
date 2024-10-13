@@ -10,7 +10,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "8.0.8",
           "Microsoft.Extensions.Http.Polly": "8.0.10",
-          "Play.Common": "1.0.0",
+          "Play.Catalog.Contracts": "1.0.0",
+          "Play.Common": "1.0.1",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -44,6 +45,68 @@
           "lib/net5.0/DnsClient.dll": {
             "assemblyVersion": "1.6.1.0",
             "fileVersion": "1.6.1.0"
+          }
+        }
+      },
+      "MassTransit/8.2.5": {
+        "dependencies": {
+          "MassTransit.Abstractions": "8.2.5",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2",
+          "Microsoft.Extensions.Options": "8.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/MassTransit.dll": {
+            "assemblyVersion": "8.2.5.0",
+            "fileVersion": "8.2.5.0"
+          }
+        }
+      },
+      "MassTransit.Abstractions/8.2.5": {
+        "runtime": {
+          "lib/net8.0/MassTransit.Abstractions.dll": {
+            "assemblyVersion": "8.2.5.0",
+            "fileVersion": "8.2.5.0"
+          }
+        }
+      },
+      "MassTransit.AspNetCore/7.3.1": {
+        "dependencies": {
+          "MassTransit": "8.2.5",
+          "MassTransit.Extensions.DependencyInjection": "7.3.1",
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MassTransit.AspNetCoreIntegration.dll": {
+            "assemblyVersion": "7.3.1.0",
+            "fileVersion": "7.3.1.0"
+          }
+        }
+      },
+      "MassTransit.Extensions.DependencyInjection/7.3.1": {
+        "dependencies": {
+          "MassTransit": "8.2.5",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MassTransit.ExtensionsDependencyInjectionIntegration.dll": {
+            "assemblyVersion": "7.3.1.0",
+            "fileVersion": "7.3.1.0"
+          }
+        }
+      },
+      "MassTransit.RabbitMQ/8.2.5": {
+        "dependencies": {
+          "MassTransit": "8.2.5",
+          "RabbitMQ.Client": "6.8.1"
+        },
+        "runtime": {
+          "lib/net8.0/MassTransit.RabbitMqTransport.dll": {
+            "assemblyVersion": "8.2.5.0",
+            "fileVersion": "8.2.5.0"
           }
         }
       },
@@ -123,6 +186,29 @@
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.1024.46610"
           }
+        }
+      },
+      "Microsoft.Extensions.Diagnostics.HealthChecks/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2",
+          "Microsoft.Extensions.Options": "8.0.2"
+        }
+      },
+      "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions/8.0.0": {},
+      "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "8.0.0"
+        }
+      },
+      "Microsoft.Extensions.Hosting.Abstractions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",
+          "Microsoft.Extensions.Diagnostics.Abstractions": "8.0.1",
+          "Microsoft.Extensions.FileProviders.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
         }
       },
       "Microsoft.Extensions.Http/8.0.1": {
@@ -285,8 +371,19 @@
           }
         }
       },
-      "Play.Common/1.0.0": {
+      "Play.Catalog.Contracts/1.0.0": {
+        "runtime": {
+          "lib/net8.0/Play.Catalog.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Play.Common/1.0.1": {
         "dependencies": {
+          "MassTransit.Abstractions": "8.2.5",
+          "MassTransit.AspNetCore": "7.3.1",
+          "MassTransit.RabbitMQ": "8.2.5",
           "Microsoft.Extensions.Configuration": "8.0.0",
           "Microsoft.Extensions.Configuration.Binder": "8.0.2",
           "Microsoft.Extensions.DependencyInjection": "8.0.1",
@@ -315,6 +412,18 @@
           "lib/netstandard2.0/Polly.Extensions.Http.dll": {
             "assemblyVersion": "3.0.0.0",
             "fileVersion": "3.0.0.0"
+          }
+        }
+      },
+      "RabbitMQ.Client/6.8.1": {
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Threading.Channels": "7.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/RabbitMQ.Client.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.8.1.0"
           }
         }
       },
@@ -382,6 +491,7 @@
         }
       },
       "System.Security.Principal.Windows/5.0.0": {},
+      "System.Threading.Channels/7.0.0": {},
       "ZstdSharp.Port/0.7.3": {
         "runtime": {
           "lib/net7.0/ZstdSharp.dll": {
@@ -418,6 +528,41 @@
       "sha512": "sha512-4H/f2uYJOZ+YObZjpY9ABrKZI+JNw3uizp6oMzTXwDw6F+2qIPhpRl/1t68O/6e98+vqNiYGu+lswmwdYUy3gg==",
       "path": "dnsclient/1.6.1",
       "hashPath": "dnsclient.1.6.1.nupkg.sha512"
+    },
+    "MassTransit/8.2.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-b/gNaT6IxX+BZnLCLTzjqia5iQJxpmIGOjPiLnD6SLBRX9tyIsYVNKPAqQ6txNe2ztOOaW4ntef84VxSvA0IEA==",
+      "path": "masstransit/8.2.5",
+      "hashPath": "masstransit.8.2.5.nupkg.sha512"
+    },
+    "MassTransit.Abstractions/8.2.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TcAV7ZEdXTrw6D74g55mlEYLBBQvsifNrdfwt0UCps7mZVBoXoS3fvMHCQguRgj+6k1Q1qEV9kZa0aUOT7GcPQ==",
+      "path": "masstransit.abstractions/8.2.5",
+      "hashPath": "masstransit.abstractions.8.2.5.nupkg.sha512"
+    },
+    "MassTransit.AspNetCore/7.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-l5zu6mHevPQGP1tfDg4My8dtqH4n2jL22+Y1+GnAs12liQy5gYLcJAwSmCKb1iusjjD9S1tgfdILVkAfShfN8w==",
+      "path": "masstransit.aspnetcore/7.3.1",
+      "hashPath": "masstransit.aspnetcore.7.3.1.nupkg.sha512"
+    },
+    "MassTransit.Extensions.DependencyInjection/7.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-s1gnkYUngHNP9m2+Jx1vuUAvoVm4KB3oVbtFJUlXNtBBzhRFq1N3Y0w5iiew60ZBLm0j0RQcSRbI0ahMOkL+og==",
+      "path": "masstransit.extensions.dependencyinjection/7.3.1",
+      "hashPath": "masstransit.extensions.dependencyinjection.7.3.1.nupkg.sha512"
+    },
+    "MassTransit.RabbitMQ/8.2.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gIBF5plL/BZo5/SNDo0C6BjOZoGqJu5YdqoDm0MI6A7kJad9H/5qfWdB4AK1A97vpK7At3i3uXTuriqx5+UKMg==",
+      "path": "masstransit.rabbitmq/8.2.5",
+      "hashPath": "masstransit.rabbitmq.8.2.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.OpenApi/8.0.8": {
       "type": "package",
@@ -481,6 +626,34 @@
       "sha512": "sha512-elH2vmwNmsXuKmUeMQ4YW9ldXiF+gSGDgg1vORksob5POnpaI6caj1Hu8zaYbEuibhqCoWg0YRWDazBY3zjBfg==",
       "path": "microsoft.extensions.diagnostics.abstractions/8.0.1",
       "hashPath": "microsoft.extensions.diagnostics.abstractions.8.0.1.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Diagnostics.HealthChecks/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-P9SoBuVZhJPpALZmSq72aQEb9ryP67EdquaCZGXGrrcASTNHYdrUhnpgSwIipgM5oVC+dKpRXg5zxobmF9xr5g==",
+      "path": "microsoft.extensions.diagnostics.healthchecks/8.0.0",
+      "hashPath": "microsoft.extensions.diagnostics.healthchecks.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AT2qqos3IgI09ok36Qag9T8bb6kHJ3uT9Q5ki6CySybFsK6/9JbvQAgAHf1pVEjST0/N4JaFaCbm40R5edffwg==",
+      "path": "microsoft.extensions.diagnostics.healthchecks.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.diagnostics.healthchecks.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZbaMlhJlpisjuWbvXr4LdAst/1XxH3vZ6A0BsgTphZ2L4PGuxRLz7Jr/S7mkAAnOn78Vu0fKhEgNF5JO3zfjqQ==",
+      "path": "microsoft.extensions.fileproviders.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Hosting.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AG7HWwVRdCHlaA++1oKDxLsXIBxmDpMPb3VoyOoAghEWnkUvEAdYQUwnV4jJbAaa/nMYNiEh5ByoLauZBEiovg==",
+      "path": "microsoft.extensions.hosting.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.hosting.abstractions.8.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Http/8.0.1": {
       "type": "package",
@@ -580,12 +753,19 @@
       "path": "mongodb.libmongocrypt/1.12.0",
       "hashPath": "mongodb.libmongocrypt.1.12.0.nupkg.sha512"
     },
-    "Play.Common/1.0.0": {
+    "Play.Catalog.Contracts/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kjQoMh0BR6pn43uGrxOHYmEnNKhFfKT8u3+dAPNN0DE7WHvLN5p6JbxYVaI+wW7yCLgzEPwfPeBmGkJTCtolsQ==",
-      "path": "play.common/1.0.0",
-      "hashPath": "play.common.1.0.0.nupkg.sha512"
+      "sha512": "sha512-0kma6HcSgLnko0i0xd6ihhlLO5/tqdTvDwJDLHomq6zkr2OB4wP7z9LsMmrdBDu+aB1CJ2tYWSXV7I27WaYPag==",
+      "path": "play.catalog.contracts/1.0.0",
+      "hashPath": "play.catalog.contracts.1.0.0.nupkg.sha512"
+    },
+    "Play.Common/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pAXz+lwWbb4wPWELqhYuLMXTL6Wxgq5o4YRVy9epAFW6r2/dwXKU2OOIipI2vbDhfigSCOvL67t1A8iei+WopQ==",
+      "path": "play.common/1.0.1",
+      "hashPath": "play.common.1.0.1.nupkg.sha512"
     },
     "Polly/7.2.4": {
       "type": "package",
@@ -600,6 +780,13 @@
       "sha512": "sha512-drrG+hB3pYFY7w1c3BD+lSGYvH2oIclH8GRSehgfyP5kjnFnHKQuuBhuHLv+PWyFuaTDyk/vfRpnxOzd11+J8g==",
       "path": "polly.extensions.http/3.0.0",
       "hashPath": "polly.extensions.http.3.0.0.nupkg.sha512"
+    },
+    "RabbitMQ.Client/6.8.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jNsmGgmCNw2S/NzskeN2ijtGywtH4Sk/G6jWUTD5sY9SrC27Xz6BsLIiB8hdsfjeyWCa4j4GvCIGkpE8wrjU1Q==",
+      "path": "rabbitmq.client/6.8.1",
+      "hashPath": "rabbitmq.client.6.8.1.nupkg.sha512"
     },
     "SharpCompress/0.30.1": {
       "type": "package",
@@ -677,6 +864,13 @@
       "sha512": "sha512-t0MGLukB5WAVU9bO3MGzvlGnyJPgUlcwerXn1kzBRjwLKixT96XV0Uza41W49gVd8zEMFu9vQEFlv0IOrytICA==",
       "path": "system.security.principal.windows/5.0.0",
       "hashPath": "system.security.principal.windows.5.0.0.nupkg.sha512"
+    },
+    "System.Threading.Channels/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA==",
+      "path": "system.threading.channels/7.0.0",
+      "hashPath": "system.threading.channels.7.0.0.nupkg.sha512"
     },
     "ZstdSharp.Port/0.7.3": {
       "type": "package",

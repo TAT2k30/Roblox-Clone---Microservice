@@ -97,3 +97,11 @@ C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Serv
 C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
 C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\obj\Debug\net8.0\Play.Catalog.Service.sourcelink.json
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\MassTransit.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\MassTransit.Abstractions.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\MassTransit.AspNetCoreIntegration.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\MassTransit.ExtensionsDependencyInjectionIntegration.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\MassTransit.RabbitMqTransport.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\Play.Catalog.Contracts.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net8.0\Play.Catalog.Contracts.pdb

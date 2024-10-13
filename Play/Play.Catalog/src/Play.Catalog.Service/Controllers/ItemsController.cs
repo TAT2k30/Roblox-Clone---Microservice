@@ -1,21 +1,21 @@
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Play.Catalog.Service.Dtos;
 using Play.Catalog.Service.Entities;
 using Play.Common.Service.Repositories;
-
+using Play.Catalog.Contracts;
 namespace Play.Catalog.Service.Controllers
 {
     // https://localhost:5001/items
     [ApiController]
     [Route("items")]
-    public class ItemsController(IRepository<Item> itemRepository) : ControllerBase
+    public class ItemsController(IRepository<Item> itemRepository, IPublishEndpoint publishEndpoint) : ControllerBase
     {
         private readonly IRepository<Item> itemRepository = itemRepository;
 
         [HttpGet]
         public async Task<IEnumerable<ItemDto>> GetAsync()
         {
-            await Task.Delay(10000);
             var items = (await itemRepository.GetAllAsync()).Select(item => item.AsDto());
             return items;
         }
@@ -44,6 +44,9 @@ namespace Play.Catalog.Service.Controllers
             };
 
             await itemRepository.CreateAsync(item);
+
+            await publishEndpoint.Publish(new CatalogItemCreated(item.Id, item.Name, item.Description));
+
             return CreatedAtAction(nameof(GetByIdAsync), new { id = item.Id }, item.AsDto());
         }
 
@@ -61,6 +64,8 @@ namespace Play.Catalog.Service.Controllers
             existingItem.UpdatedDate = DateTimeOffset.UtcNow;
 
             await itemRepository.UpdateAsync(existingItem);
+            await publishEndpoint.Publish(new CatalogItemUpdated(id, existingItem.Name, existingItem.Description));
+
             return NoContent();
         }
 

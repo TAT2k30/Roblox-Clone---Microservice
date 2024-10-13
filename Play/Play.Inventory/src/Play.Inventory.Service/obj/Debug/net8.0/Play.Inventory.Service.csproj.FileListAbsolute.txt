@@ -59,3 +59,10 @@ C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.
 C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\Polly.dll
 C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\Polly.Extensions.Http.dll
 C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\obj\Debug\net8.0\Play.Inventory.Service.sourcelink.json
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\MassTransit.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\MassTransit.Abstractions.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\MassTransit.AspNetCoreIntegration.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\MassTransit.ExtensionsDependencyInjectionIntegration.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\MassTransit.RabbitMqTransport.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\Play.Catalog.Contracts.dll
+C:\Users\Admin\Desktop\.Net Microservice\Play\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net8.0\RabbitMQ.Client.dll

@@ -1,5 +1,6 @@
 
 using Amazon.Auth.AccessControlPolicy;
+using Play.Common.MassTransit;
 using Play.Common.Service.MongoDB;
 using Play.Inventory.Service.Clients;
 using Play.Inventory.Service.Entities;
@@ -14,7 +15,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 //Adding Repository of MongoDB
-builder.Services.AddMongo().AddMongoRepository<InventoryItem>("inventoryItems");
+builder.Services.AddMongo()
+                .AddMongoRepository<InventoryItem>("inventoryItems")
+                .AddMongoRepository<CatalogItem>("catalogItems")
+                .AddMassTransitWithRabbitMQ(builder.Configuration);
+
+
 builder.Services.AddHttpClient<CatalogClient>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5001");

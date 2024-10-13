@@ -1,12 +1,15 @@
 
 using Play.Catalog.Service.Entities;
 using Play.Common.Service.MongoDB;
-
+using MassTransit;
+using Play.Common.Service.Settings.ServiceSettings;
+using Play.Common.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Register mongoDb Repository
-builder.Services.AddMongo().AddMongoRepository<Item>("items");
+builder.Services.AddMongo()
+                .AddMongoRepository<Item>("items")
+                .AddMassTransitWithRabbitMQ(builder.Configuration);
 
 // Add controllers
 builder.Services.AddControllers(options =>
