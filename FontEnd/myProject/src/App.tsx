@@ -1,13 +1,10 @@
+import Header from './components/commons/header/Header';
 import './index.css'
 
 function App() {
-
-
   return (
     <>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-blue-600">Hello, Tailwind CSS!</h1>
-      </div>
+      <Header></Header>
     </>
   );
 }
