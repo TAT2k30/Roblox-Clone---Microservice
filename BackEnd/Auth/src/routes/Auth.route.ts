@@ -1,23 +1,25 @@
 import { Router } from "express";
 import {
-  login,
-  register,
-  refreshToken,
-  logout,
   getAllUser,
+  login,
+  logout,
+  refreshToken,
+  register,
 } from "../controllers/Auth.Controller";
-import { validateRequest } from "../middlewares/validateRequest";
-const {
-  registerValidation,
-  loginValidation,
-} = require("../validations/auth.schema.validation");
+import {
+  getAllUserMiddlewares,
+  loginMiddlewares,
+  logoutMiddlewares,
+  refreshTokenMiddlewares,
+  registerMiddlewares,
+} from "../middlewares/contracts/auth.middleware.contracts";
 
 const router = Router();
 
-router.post("/login", loginValidation, validateRequest, login);
-router.post("/register", registerValidation, validateRequest, register);
-router.post("/refresh-token", refreshToken);
-router.delete("/logout", logout);
-router.get("/getAllUser", getAllUser);
+router.post("/login", loginMiddlewares, login);
+router.post("/register", registerMiddlewares, register);
+router.post("/refresh-token", refreshTokenMiddlewares, refreshToken);
+router.delete("/logout", logoutMiddlewares, logout);
+router.get("/getAllUser", getAllUserMiddlewares, getAllUser);
 
 export default router;

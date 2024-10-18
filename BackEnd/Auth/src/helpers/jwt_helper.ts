@@ -1,36 +1,43 @@
-import JWT = require("jsonwebtoken");
-import createError = require("http-errors");
+import { JwtPayload, sign, verify } from "jsonwebtoken";
+import createError from "http-errors";
 import { IUser } from "../interfaces/IUser.interface";
+import { NextFunction, Request, Response } from "express";
+import { IVerifyToken } from "../interfaces/IVerifyToken.interface";
+import { IJWTPayload } from "../interfaces/IJWTPayload.interface";
 
-module.exports = {
-  createAccessToken: (user: IUser) => {
-    return new Promise((resolve, reject) => {
-      const payload = {
-        Name: user.username,
-        Email: user.email,
-        Role: user.role,
-      };
+const getAccessSecret = () => process.env.JWT_ACCESS_SECRET as string;
+const getRefreshSecret = () => process.env.JWT_REFRESH_SECRET as string;
 
-      const secret = `${process.env.JWT_SECRET}`;
+export const createAccessToken = async (user: IUser): Promise<string> => {
+  const payload: IJWTPayload = {
+    name: user.username,
+    email: user.email,
+    role: user.role,
+  };
 
-      const options = {
-        expiresIn: "1h",
-      };
+  const options = {
+    expiresIn: "1h",
+    audience: user.id,
+  };
 
-      JWT.sign(payload, secret, options, (err, token) => {
-        if (err) reject(err);
-        resolve(token);
-      });
+  return new Promise((resolve, reject) => {
+    sign(payload, getAccessSecret(), options, (err, token) => {
+      if (err) {
+        return reject(createError(500, "Error signing token"));
+      }
+      resolve(token as string);
     });
-  },
+  });
+};
 
-  verifyAccessToken: (token: string) => {
-    const secret = `${process.env.JWT_SECRET}`;
-    try {
-      const decoded = JWT.verify(token, secret);
-      return { success: true, data: decoded };
-    } catch (error) {
-      return { success: false, error: error.message };
-    }
-  },
+export const verifyAccessToken = (token: string): IVerifyToken => {
+  try {
+    const decoded = verify(token, getAccessSecret()) as IJWTPayload;
+    return { success: true, data: decoded };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Invalid token",
+    };
+  }
 };

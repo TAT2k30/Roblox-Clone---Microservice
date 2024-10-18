@@ -3,27 +3,34 @@ import { RegisterRequest } from "../interfaces/Request/RegisterRequest";
 import { validationResult } from "express-validator";
 import { LoginRequest } from "../interfaces/Request/LoginRequest";
 
-const { signAccessToken } = require("../helpers/jwt_helper");
-const bcrypt = require("bcrypt");
-const User = require("../models/User.model");
+import { createAccessToken } from "../helpers/jwt_helper";
+import bcrypt = require("bcrypt");
+import User from "../models/User.model";
 
 export const login = async (
   req: Request<{}, {}, LoginRequest>,
   res: Response
-) => {
+): Promise<void> => {
   const { email, password } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      if (bcrypt.hash(password, 10) !== existingUser.Password) {
+      const isMatch = await bcrypt.compare(password, existingUser.password);
+      if (!isMatch) {
         res.status(400).json({ message: "Invalid credentials." });
+        return;
       }
+      const accessToken = await createAccessToken(existingUser);
+      res.status(200).json({ accessToken });
+      return;
     } else {
       res.status(400).json({ message: "Invalid credentials." });
+      return;
     }
   } catch (error) {
-    console.error("Error registering user:", error);
+    console.error("Error logging in user:", error);
     res.status(500).json({ message: "Server error" });
+    return;
   }
 };
 
@@ -46,9 +53,9 @@ export const register = async (
     });
 
     await newUser.save();
-    const accessToken = signAccessToken(newUser.userId);
+    const accessToken = createAccessToken(newUser);
 
-    res.status(201).json({ message: accessToken });
+    res.status(201).json({ accessToken: accessToken });
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).json({ message: "Server error" });

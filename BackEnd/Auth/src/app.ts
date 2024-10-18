@@ -8,13 +8,14 @@ import { notFoundHandler } from "./middlewares/notFoundHandler";
 import { initMongoDB } from "./helpers/init_mongo";
 
 const app = express();
-
+var cors = require("cors");
 // Khởi tạo MongoDB
 initMongoDB();
 
 // Middleware
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Định nghĩa các route
