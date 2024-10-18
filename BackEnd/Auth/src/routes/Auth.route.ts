@@ -20,6 +20,6 @@ router.post("/login", loginMiddlewares, login);
 router.post("/register", registerMiddlewares, register);
 router.post("/refresh-token", refreshTokenMiddlewares, refreshToken);
 router.delete("/logout", logoutMiddlewares, logout);
-router.get("/getAllUser", getAllUserMiddlewares, getAllUser);
+router.get("/", getAllUserMiddlewares, getAllUser);
 
 export default router;

@@ -3,9 +3,16 @@ import { RegisterRequest } from "../interfaces/Request/RegisterRequest";
 import { validationResult } from "express-validator";
 import { LoginRequest } from "../interfaces/Request/LoginRequest";
 
-import { createAccessToken } from "../helpers/jwt_helper";
+import {
+  createAccessToken,
+  createRefreshToken,
+  verifyRefreshToken,
+} from "../helpers/jwt_helper";
 import bcrypt = require("bcrypt");
 import User from "../models/User.model";
+import { responseHandler } from "../middlewares/handlers/responseHanlder";
+import { IUser } from "../interfaces/IUser.interface";
+import { RefreshTokenRequest } from "../interfaces/Request/RefreshTokenRequest";
 
 export const login = async (
   req: Request<{}, {}, LoginRequest>,
@@ -18,19 +25,24 @@ export const login = async (
       const isMatch = await bcrypt.compare(password, existingUser.password);
       if (!isMatch) {
         res.status(400).json({ message: "Invalid credentials." });
-        return;
       }
       const accessToken = await createAccessToken(existingUser);
-      res.status(200).json({ accessToken });
-      return;
+      const refreshToken = await createRefreshToken(existingUser);
+
+      responseHandler<{}>(res, 200, "Logged in successfully", {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      });
     } else {
-      res.status(400).json({ message: "Invalid credentials." });
-      return;
+      responseHandler(res, 400, "Logged in failed", {
+        messageErr: "Invalid credentials.",
+      });
     }
   } catch (error) {
     console.error("Error logging in user:", error);
-    res.status(500).json({ message: "Server error" });
-    return;
+    responseHandler(res, 500, "Logged in failed", {
+      messageErr: "Server error",
+    });
   }
 };
 
@@ -42,8 +54,9 @@ export const register = async (
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      res.status(400).json({ message: "User already exists." });
-      return;
+      responseHandler(res, 500, "Register failed", {
+        messageErr: "User already exists.",
+      });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
@@ -53,21 +66,73 @@ export const register = async (
     });
 
     await newUser.save();
-    const accessToken = createAccessToken(newUser);
+    const accessToken = await createAccessToken(newUser);
+    const refreshToken = await createRefreshToken(newUser);
 
-    res.status(201).json({ accessToken: accessToken });
+    responseHandler<{}>(res, 201, "Registered successfully", {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    });
   } catch (error) {
     console.error("Error registering user:", error);
-    res.status(500).json({ message: "Server error" });
+    responseHandler(res, 500, "Register failed", {
+      messageErr: "Server error",
+    });
   }
 };
 
-export const refreshToken = async (req: Request, res: Response) => {
-  res.send("refresh token page");
+export const refreshToken = async (
+  req: Request<{}, {}, RefreshTokenRequest>,
+  res: Response
+): Promise<void> => {
+  const { refreshToken } = req.body;
+
+  if (!refreshToken) {
+    responseHandler(res, 401, "Refresh token not found", {
+      messageErr: "Refresh token not provided",
+    });
+  }
+
+  try {
+    // Xác thực refresh token
+    const { success, data, error } = verifyRefreshToken(refreshToken);
+    if (!success) {
+      responseHandler(res, 403, "Invalid refresh token", {
+        messageErr: error,
+      });
+    }
+
+    // Tìm người dùng từ payload của refresh token
+    const existingUser = await User.findOne({ email: data!.email });
+    if (!existingUser) {
+      responseHandler(res, 403, "User not found", {
+        messageErr: "No user found for the provided token",
+      });
+    }
+
+    // Đảm bảo existingUser là kiểu IUser
+    const user = existingUser as IUser;
+
+    // Tạo mới access token và refresh token
+    const accessToken = await createAccessToken(user);
+    const newRefreshToken = await createRefreshToken(user);
+
+    // Trả về access token và refresh token mới
+    responseHandler(res, 200, "Tokens refreshed successfully", {
+      accessToken: accessToken,
+      refreshToken: newRefreshToken,
+    });
+  } catch (error) {
+    console.error("Error refreshing token:", error);
+    responseHandler(res, 403, "Invalid refresh token", {
+      messageErr: "Refresh token verification failed",
+    });
+  }
 };
 
-export const logout = async (req: Request, res: Response) => {
-  res.send("logout page");
+export const logout = async (req: Request, res: Response): Promise<void> => {
+  const exampleData = { message: "Hello, World!" };
+  responseHandler(res, 200, "Data fetched successfully", exampleData);
 };
 
 export const getAllUser = async (req: Request, res: Response) => {

@@ -6,10 +6,15 @@ import {
   getAllUser,
 } from "../../controllers/Auth.Controller";
 import { validateRequest } from "../../middlewares/validateRequest";
-import { isRoleAdmin, isRoleUser } from "../../middlewares/roleMiddleWare";
+import {
+  authenticated,
+  isRoleAdmin,
+  isRoleUser,
+} from "../../middlewares/roleMiddleWare";
 const {
   registerValidation,
   loginValidation,
+  refreshTokenValidation,
 } = require("../../validations/auth.schema.validation");
 
 // Middleware cho đăng nhập
@@ -19,13 +24,20 @@ export const loginMiddlewares = [loginValidation, validateRequest];
 export const registerMiddlewares = [registerValidation, validateRequest];
 
 // Middleware cho refresh token
-export const refreshTokenMiddlewares = [validateRequest];
+export const refreshTokenMiddlewares = [
+  refreshTokenValidation,
+  validateRequest,
+];
 
 // Middleware cho logout
-export const logoutMiddlewares = [validateRequest];
+export const logoutMiddlewares = [validateRequest, authenticated];
 
 // Middleware cho getAllUser với quyền admin
-export const getAllUserMiddlewares = [validateRequest, isRoleAdmin];
+export const getAllUserMiddlewares = [
+  validateRequest,
+  authenticated,
+  isRoleAdmin,
+];
 
 // Middleware cho một route chỉ yêu cầu người dùng là "user"
-export const userMiddlewares = [validateRequest, isRoleUser];
+export const userMiddlewares = [validateRequest, authenticated, isRoleUser];
