@@ -3,25 +3,24 @@ import express, { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 import config from "./config";
 import AuthRoutes from "./routes/Auth.route";
-import { errorHandler } from "./middlewares/errorHandler";
-import { notFoundHandler } from "./middlewares/notFoundHandler";
+import { errorHandler } from "./middlewares/handlers/errorHandler";
+import { notFoundHandler } from "./middlewares/handlers/notFoundHandler";
 import { initMongoDB } from "./helpers/init_mongo";
 
 const app = express();
-
+var cors = require("cors");
 // Khởi tạo MongoDB
 initMongoDB();
 
 // Middleware
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Định nghĩa các route
 app.use("/auth", AuthRoutes);
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello from express");
-});
+
 
 // Middleware xử lý 404
 app.use(notFoundHandler);

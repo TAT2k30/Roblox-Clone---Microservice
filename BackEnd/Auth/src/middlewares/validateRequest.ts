@@ -1,15 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
+import createError from "http-errors";
+import { responseHandler } from "./handlers/responseHanlder";
 
-export const validateRequest =  async (
+export const validateRequest = (
   req: Request,
   res: Response,
   next: NextFunction
-) : Promise<void>  => {
+): void => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(400).json({ errors: errors.array() });
-    return;
+    responseHandler(res, 400, "Validation errors", {
+      errors: errors.array(),
+    });
   }
-  next(); 
+  next();
 };
