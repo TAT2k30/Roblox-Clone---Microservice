@@ -43,7 +43,7 @@ function Header() {
           </span>
         </div>
         {/**login and signup */}
-        <div className="login and signup flex between-items">
+        <div className="login and signup flex between">
           <div className="login">
             <form action="submit">Dang nhap</form>
           </div>
