@@ -1,15 +1,18 @@
-// import Body from "./components/commons/body/Body";
+// import { BrowserRouter } from 'react-router-dom';
 import Footer from "./components/commons/footer/Footer";
 import Header from "./components/commons/header/Header";
+import AppRoutes from "./configs/Routes/RouteConfig";
+
 import Signup from "./components/commons/register/Signup";
 
 function App() {
   return (
-    <div className="bg-gray-100">
+    <>
       <Header></Header>
+      <AppRoutes></AppRoutes>
       <Signup></Signup>
       <Footer></Footer>
-    </div>
+    </>
   );
 }
 
