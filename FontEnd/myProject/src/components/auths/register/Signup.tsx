@@ -1,6 +1,4 @@
-import React from "react";
-
-function Signup() {
+function Register() {
   return (
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">
       <div className="bg-green-300 p-8 rounded-lg shadow-md w-full max-w-md">
@@ -62,4 +60,4 @@ function Signup() {
     </div>
   );
 }
-export default Signup;
+export default Register;
