@@ -3,15 +3,17 @@ import Footer from "./components/commons/footer/Footer";
 import Header from "./components/commons/header/Header";
 import AppRoutes from "./configs/Routes/RouteConfig";
 
-import Signup from "./components/commons/register/Signup";
+import Signup from "./components/auths/register/Signup";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Header></Header>
-      <AppRoutes></AppRoutes>
-      <Signup></Signup>
-      <Footer></Footer>
+      <BrowserRouter>
+        <Header></Header>
+        <AppRoutes></AppRoutes>
+        <Footer></Footer>
+      </BrowserRouter>
     </>
   );
 }
