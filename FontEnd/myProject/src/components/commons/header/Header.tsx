@@ -42,6 +42,15 @@ function Header() {
             </svg>
           </span>
         </div>
+        {/**login and signup */}
+        <div className="login and signup flex between-items">
+          <div className="login">
+            <form action="submit">Dang nhap</form>
+          </div>
+          <div className="login">
+            <form action="submit">Dang ki</form>
+          </div>
+        </div>
       </div>
     </header>
   );
