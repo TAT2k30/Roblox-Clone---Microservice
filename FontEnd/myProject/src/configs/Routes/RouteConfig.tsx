@@ -3,8 +3,8 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "../../pages/userPages/publicPages/HomePage";
 import NotFoundPage from "../../pages/404Page/NotFoundPage";
-import Login from "../../components/auths/login/Login";
 import Register from "../../components/auths/register/Signup";
+import Signin from "../../components/auths/login/Signin";
 
 const AppRoutes = () => {
   return (
@@ -12,7 +12,7 @@ const AppRoutes = () => {
       <Routes>
         {/* Public Routes - Các route ra vào thoải mải không ràng buộc*/}
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Signin />} />
         <Route path="/register" element={<Register />} />
 
         {/* Private Routes - Các route bắt buộc phải Login hoặc với Role gì đấy mới được vào*/}
