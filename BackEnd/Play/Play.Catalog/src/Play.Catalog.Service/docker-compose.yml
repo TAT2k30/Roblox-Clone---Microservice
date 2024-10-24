@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # Dịch vụ nuget-service
+  nuget-service:
+    build:
+      context: C:\Users\Admin\Desktop\Streaming Project\BackEnd\packages # Đường dẫn chứa Dockerfile
+    image: nuget-service
+    container_name: nuget-service
+
+  # APIS - SERVICES
+  catalog-service:
+    build:
+      context: C:\Users\Admin\Desktop\Streaming Project\BackEnd\Play\Play.Catalog\src\Play.Catalog.Service\dockerConfigs
+      dockerfile: Dockerfile
+    image: catalog-service
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017
+      - DB_NAME=Catalog
+    depends_on:
+      - mongo
+      - nuget-service # Đảm bảo rằng nuget-service đã sẵn sàng trước khi catalog-service khởi động
+    networks:
+      - internal-network
+    volumes:
+      - C:\Users\Admin\Desktop\Streaming Project\BackEnd\packages:/root/.nuget/packages # Mount thư mục chứa gói NuGet từ host
+
+  # Databases 
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    volumes:
+      - mongodbdata:/data/db
+    networks:
+      - internal-network 
+
+  redis: 
+    image: redis
+    container_name: redis
+    restart: always
+    volumes: 
+      - redisdata:/data
+    networks:
+      - internal-network
+
+volumes:
+  mongodbdata:
+  redisdata:
+
+networks:
+  internal-network:
+    internal: true

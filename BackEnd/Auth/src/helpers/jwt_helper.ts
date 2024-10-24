@@ -5,14 +5,24 @@ import {
   TokenExpiredError,
   verify,
 } from "jsonwebtoken";
+import dotenv from "dotenv";
 import createError from "http-errors";
 import { IUser } from "../interfaces/IUser.interface";
-import { NextFunction, Request, Response } from "express";
 import { IVerifyToken } from "../interfaces/IVerifyToken.interface";
 import { IJWTPayload } from "../interfaces/IJWTPayload.interface";
+dotenv.config();
 
-const getAccessSecret = () => process.env.JWT_ACCESS_SECRET as string;
-const getRefreshSecret = () => process.env.JWT_REFRESH_SECRET as string;
+const getAccessSecret = (): string => {
+  const secret = process.env.JWT_ACCESS_SECRET;
+  if (!secret) throw new Error("JWT_ACCESS_SECRET is not defined");
+  return secret;
+};
+
+const getRefreshSecret = (): string => {
+  const secret = process.env.JWT_REFRESH_SECRET;
+  if (!secret) throw new Error("JWT_REFRESH_SECRET is not defined");
+  return secret;
+};
 
 export const createAccessToken = async (user: IUser): Promise<string> => {
   const payload: IJWTPayload = {
@@ -29,7 +39,7 @@ export const createAccessToken = async (user: IUser): Promise<string> => {
   return new Promise((resolve, reject) => {
     sign(payload, getAccessSecret(), options, (err, token) => {
       if (err) {
-        return reject(createError(500, "Error signing token"));
+        return reject(createError(500, "Error signing access token"));
       }
       resolve(token as string);
     });
@@ -44,17 +54,17 @@ export const verifyAccessToken = (token: string): IVerifyToken => {
     if (error instanceof TokenExpiredError) {
       return {
         success: false,
-        error: "Token has expired",
+        error: "Access token has expired",
       };
     } else if (error instanceof JsonWebTokenError) {
       return {
         success: false,
-        error: "Invalid token",
+        error: "Invalid access token",
       };
     } else {
       return {
         success: false,
-        error: "Token verification failed",
+        error: "Access token verification failed",
       };
     }
   }
@@ -68,7 +78,7 @@ export const createRefreshToken = async (user: IUser): Promise<string> => {
   };
 
   const options = {
-    expiresIn: "1y",
+    expiresIn: "1w",
     audience: user.id,
   };
 

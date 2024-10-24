@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/bMw9RX3UiU=",
+  "dgSpecHash": "JbmhbLHBxi0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Desktop\\Roblox Project\\BackEnd\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

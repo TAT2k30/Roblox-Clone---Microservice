@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # APIS - SERVICES
+  auth-service:
+    build:
+      context: C:\Users\Admin\Desktop\Streaming Project\BackEnd\Auth\dockerConfigs
+      dockerfile: Dockerfile
+    image: auth-service
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017
+      - DB_NAME=User
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"  # Chỉ ánh xạ cổng 3000 ra ngoài cho API Gateway
+    command: npm run dev
+    networks:
+      - internal-network   # Sử dụng mạng nội bộ để giao tiếp với mongo
+      - public-network     # Mạng công khai cho phép truy cập từ bên ngoài
+
+  # Databases 
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    networks:
+      - internal-network   # Chỉ sử dụng mạng nội bộ
+    volumes:
+      - mongodbdata:/data/db
+
+  redis: 
+    image: redis
+    container_name: redis
+    restart: always
+    networks:
+      - internal-network   # Chỉ sử dụng mạng nội bộ
+    volumes: 
+      - redisdata:/data
+
+
+volumes:
+  mongodbdata:
+  redisdata:
+
+networks:
+  internal-network:
+    internal: true  # Mạng này là mạng nội bộ, chỉ các dịch vụ trong mạng mới có thể giao tiếp với nhau
+  public-network:
+    driver: bridge  # Mạng công khai cho phép API Gateway kết nối với bên ngoài

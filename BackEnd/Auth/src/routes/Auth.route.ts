@@ -16,9 +16,9 @@ import {
 
 const router = Router();
 
-router.post("/login", loginMiddlewares, login);
-router.post("/register", registerMiddlewares, register);
-router.post("/refresh-token", refreshTokenMiddlewares, refreshToken);
+router.post("/login", ...loginMiddlewares, login);
+router.post("/register", ...registerMiddlewares, register);
+router.post("/refresh-token", ...refreshTokenMiddlewares, refreshToken);
 router.delete("/logout", logoutMiddlewares, logout);
 router.get("/", getAllUserMiddlewares, getAllUser);
 

@@ -1,3 +1,4 @@
+// validateRequest.js
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import createError from "http-errors";
@@ -13,6 +14,7 @@ export const validateRequest = (
     responseHandler(res, 400, "Validation errors", {
       errors: errors.array(),
     });
+    return;
   }
   next();
 };

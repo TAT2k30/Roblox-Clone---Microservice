@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\Roblox Project\\BackEnd\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj": {
+    "C:\\Users\\Admin\\Desktop\\Roblox Project\\BackEnd\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Roblox Project\\BackEnd\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj",
         "projectName": "Play.Common",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\Roblox Project\\BackEnd\\Play\\Play.Common\\src\\Play.Common\\Play.Common.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Common\\src\\Play.Common\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\Roblox Project\\BackEnd\\Play\\Play.Common\\src\\Play.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Common\\src\\Play.Common\\NuGet.Config",
+          "C:\\Users\\Admin\\Desktop\\Roblox Project\\BackEnd\\Play\\Play.Common\\src\\Play.Common\\NuGet.Config",
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

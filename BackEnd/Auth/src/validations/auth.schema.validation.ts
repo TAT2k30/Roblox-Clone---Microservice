@@ -1,9 +1,10 @@
 import { NextFunction } from "express";
 import { check, validationResult } from "express-validator";
+import { validateRequest } from "../middlewares/validateRequest";
 
 var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
 
-const registerValidation = [
+export const registerValidation = [
   check("username").not().isEmpty().withMessage("Username is required"),
   check("email").isEmail().withMessage("A valid email is required"),
   check("password")
@@ -15,7 +16,7 @@ const registerValidation = [
     ),
 ];
 
-const loginValidation = [
+export const loginValidation = [
   check("email").isEmail().withMessage("A valid email is required"),
   check("password")
     .isLength({ min: 8, max: 20 })
@@ -26,12 +27,9 @@ const loginValidation = [
     ),
 ];
 
-const refreshTokenValidation = [
-  check("refreshToken").not().isEmpty().withMessage("Refresh token is required"),
+export const refreshTokenValidation = [
+  check("refreshToken")
+    .not()
+    .isEmpty()
+    .withMessage("Refresh token is required"),
 ];
-
-module.exports = {
-  registerValidation,
-  loginValidation,
-  refreshTokenValidation,
-};

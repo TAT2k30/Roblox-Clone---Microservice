@@ -1,26 +1,33 @@
 import mongoose from "mongoose";
 
-// const mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/myapp";
-
 export const connectMongoDB = async () => {
-  try {
-    await mongoose.connect(`${process.env.MONGODB_URI}`, {
-      dbName: process.env.DB_NAME,
-    });
+  const mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017";
+  const dbName = process.env.DB_NAME || "User";
 
-    mongoose.connection.on("connected", () => {
-      console.log("Mongoose connected to db");
-    });
+  const connectWithRetry = async () => {
+    try {
+      await mongoose.connect(`${mongoURI}/${dbName}`, {
+        serverSelectionTimeoutMS: 5000, // Max time Mongoose waits to connect to MongoDB
+        socketTimeoutMS: 45000, // Max time for each operation
+      });
 
-    mongoose.connection.on("error", (err) => {
-      console.log(err.message);
-    });
+      console.log(`Mongoose connected to ${dbName}`);
 
-    mongoose.connection.on("dissconnected", () => {
-      console.log("Mongoose disconnected to db");
-    });
-  } catch (error) {
-    console.error("MongoDB connection failed", error);
-    process.exit(1);
-  }
+      mongoose.connection.on("error", (err) => {
+        console.error(`Mongoose connection error: ${err.message}`);
+      });
+
+      mongoose.connection.on("disconnected", () => {
+        console.warn("Mongoose disconnected from the database");
+      });
+    } catch (error) {
+      console.error(
+        "MongoDB connection failed, retrying in 5 seconds...",
+        error
+      );
+      setTimeout(connectWithRetry, 5000); // Retry after 5 seconds
+    }
+  };
+
+  connectWithRetry(); // Start the connection attempt
 };

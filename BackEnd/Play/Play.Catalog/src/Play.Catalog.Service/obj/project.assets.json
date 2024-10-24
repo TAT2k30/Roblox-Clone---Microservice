@@ -2439,14 +2439,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Catalog\\src\\Play.Catalog.Service\\Play.Catalog.Service.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Streaming Project\\BackEnd\\Play\\Play.Catalog\\src\\Play.Catalog.Service\\Play.Catalog.Service.csproj",
       "projectName": "Play.Catalog.Service",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Catalog\\src\\Play.Catalog.Service\\Play.Catalog.Service.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\Streaming Project\\BackEnd\\Play\\Play.Catalog\\src\\Play.Catalog.Service\\Play.Catalog.Service.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Catalog\\src\\Play.Catalog.Service\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\Streaming Project\\BackEnd\\Play\\Play.Catalog\\src\\Play.Catalog.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Catalog\\src\\Play.Catalog.Service\\NuGet.Config",
+        "C:\\Users\\Admin\\Desktop\\Streaming Project\\BackEnd\\Play\\Play.Catalog\\src\\Play.Catalog.Service\\NuGet.Config",
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2461,8 +2461,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Catalog\\src\\Play.Catalog.Contracts\\Play.Catalog.Contracts.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\.Net Microservice\\Play\\Play.Catalog\\src\\Play.Catalog.Contracts\\Play.Catalog.Contracts.csproj"
+            "C:\\Users\\Admin\\Desktop\\Streaming Project\\BackEnd\\Play\\Play.Catalog\\src\\Play.Catalog.Contracts\\Play.Catalog.Contracts.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\Streaming Project\\BackEnd\\Play\\Play.Catalog\\src\\Play.Catalog.Contracts\\Play.Catalog.Contracts.csproj"
             }
           }
         }

@@ -1,24 +1,23 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  mongo:
-    image: mongo
-    container_name: mongo
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodbdata:/data/db
-
+  # Messages
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq
-    ports:
-      - 5672:5672
-      - 15672:15672
     volumes:
       - rabbitmqdata:/var/lib/rabbitmq
     hostname: rabbitmq
 
+  nuget-service:
+    build:
+      context: C:/Users/Admin/Desktop/Streaming Project/BackEnd/packages # Đường dẫn đến thư mục chứa Dockerfile
+      dockerfile: Dockerfile # Nếu Dockerfile của bạn không phải là tên mặc định
+    image: nuget-service # Tên image sẽ được tạo
+    container_name: nuget-service
+    volumes:
+      - nuget-packages:/root/.nuget/packages # Đường dẫn để lưu trữ các NuGet packages
+
 volumes:
-  mongodbdata:
   rabbitmqdata:
+  nuget-packages: # Khai báo volume để lưu trữ NuGet packages

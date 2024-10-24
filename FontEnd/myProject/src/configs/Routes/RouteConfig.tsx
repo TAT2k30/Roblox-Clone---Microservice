@@ -5,6 +5,7 @@ import HomePage from "../../pages/userPages/publicPages/HomePage";
 import NotFoundPage from "../../pages/404Page/NotFoundPage";
 import Login from "../../components/auths/login/Login";
 import Register from "../../components/auths/register/Signup";
+import React from "react";
 
 
 const AppRoutes = () => {
